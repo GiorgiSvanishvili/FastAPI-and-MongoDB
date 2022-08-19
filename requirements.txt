@@ -1,0 +1,7 @@
+fastapi
+pydantic
+uvicorn
+pymongo
+dnspython
+python-dotenv
+motor==2.5.1
