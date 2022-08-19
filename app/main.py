@@ -1,14 +1,12 @@
 from typing import List
 
-from fastapi import FastAPI, Body, HTTPException, status
-
-import uvicorn
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
-from config import settings
 import motor.motor_asyncio
-from models.base import UserModel, CompanyModel, UpdateCompanyModel
-
+import uvicorn
+from config import settings
+from fastapi import Body, FastAPI, HTTPException, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
+from models.base import CompanyModel, UpdateCompanyModel, UserModel
 
 app = FastAPI()
 
