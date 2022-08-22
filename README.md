@@ -1,4 +1,4 @@
-This is a small sample project demonstrating how to build an API with MongoDB and FastAPI.
+This is a small sample project building an API with MongoDB and FastAPI.
 
 How to deploy local environment and run the project:
 
