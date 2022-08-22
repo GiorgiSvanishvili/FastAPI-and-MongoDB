@@ -42,12 +42,12 @@ async def list_users():
     return users
 
 
-@app.put("/{id}", response_description="Update a company", response_model=CompanyModel)
+@app.put("/{id}", response_description="Update a company", response_model=UpdateCompanyModel)
 async def update_company(id: str, company: UpdateCompanyModel = Body(...)):
     company = {k: v for k, v in company.dict().items() if v is not None}
 
     if len(company) >= 1:
-        update_result = await db["students"].update_one({"_id": id}, {"$set": company})
+        update_result = await db["companies"].update_one({"_id": id}, {"$set": company})
 
         if update_result.modified_count == 1:
             if (
