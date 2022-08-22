@@ -6,7 +6,7 @@ How to deploy local environment and run the project:
 pip install -r requirements.txt
 
 # Configure the location of your MongoDB database:
-export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=true&w=majority"
+Create a local .env file and declare a variable MONGODB_URL=mongodb+srv://<username>:<password>@cluster0.6qx8a.mongodb.net/?retryWrites=true&w=majority
 
 # Start the service:
 python app/main.py
