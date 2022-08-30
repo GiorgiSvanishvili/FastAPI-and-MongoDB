@@ -3,10 +3,10 @@ from typing import List
 import motor.motor_asyncio
 import uvicorn
 from config import settings
-from fastapi import Body, FastAPI, HTTPException, status
+from fastapi import Body, FastAPI, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from models.base import CompanyModel, UpdateCompanyModel, UserModel
+from models.base import CompanyModel, UserModel
 
 app = FastAPI()
 
@@ -40,25 +40,6 @@ async def list_companies():
 async def list_users():
     users = await db["users"].find().to_list(1000)
     return users
-
-
-@app.put("/{id}", response_description="Update a company", response_model=UpdateCompanyModel)
-async def update_company(id: str, company: UpdateCompanyModel = Body(...)):
-    company = {k: v for k, v in company.dict().items() if v is not None}
-
-    if len(company) >= 1:
-        update_result = await db["companies"].update_one({"_id": id}, {"$set": company})
-
-        if update_result.modified_count == 1:
-            if (
-                updated_company := await db["companies"].find_one({"_id": id})
-            ) is not None:
-                return updated_company
-
-    if (existing_company := await db["companies"].find_one({"_id": id})) is not None:
-        return existing_company
-
-    raise HTTPException(status_code=404, detail=f"Company {id} not found")
 
 
 if __name__ == "__main__":

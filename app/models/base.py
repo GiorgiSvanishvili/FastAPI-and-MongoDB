@@ -1,5 +1,3 @@
-from typing import Optional
-
 from bson import ObjectId
 from pydantic import BaseModel, Field
 
@@ -47,21 +45,7 @@ class CompanyModel(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
-                "company_name": "VALA",
+                "company_name": "Amazon",
             }
         }
 
-
-class UpdateCompanyModel(BaseModel):
-    user_name: Optional[str]
-    company_name: Optional[str]
-
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
-        schema_extra = {
-            "example": {
-                "company_name": "Vala",
-                "user_name": "Jane Doe"
-            }
-        }
