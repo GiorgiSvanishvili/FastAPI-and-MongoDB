@@ -1,0 +1,4 @@
+isort
+mypy
+pytest
+flake8~=4.0.1
