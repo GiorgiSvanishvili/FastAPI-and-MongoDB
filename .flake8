@@ -40,6 +40,7 @@ ignore=
     E127,
     # W504 line break after binary operator
     W504,
+    W391
 
 max-cognitive-complexity=20
 max-complexity=20
