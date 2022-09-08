@@ -28,4 +28,7 @@ jobs:
       - name: Run isort
         run: |
           isort . -c
+      - name: Run flake8
+        run: |
+          python -m flake8 --config=.flake8
           

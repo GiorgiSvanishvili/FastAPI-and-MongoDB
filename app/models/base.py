@@ -48,4 +48,3 @@ class CompanyModel(BaseModel):
                 "company_name": "Amazon",
             }
         }
-
