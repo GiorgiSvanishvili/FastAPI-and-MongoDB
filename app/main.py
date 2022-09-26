@@ -2,10 +2,11 @@ from typing import List
 
 import motor.motor_asyncio
 import uvicorn
-from config import settings
-from fastapi import Body, FastAPI, status
+from fastapi import Body, FastAPI, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+
+from config import settings
 from models.base import CompanyModel, UserModel
 
 app = FastAPI()
@@ -33,14 +34,17 @@ async def create_company(company: CompanyModel = Body(...)):
 @app.get("/Companies", response_description="List all companies", response_model=List[CompanyModel])
 async def list_companies():
     companies = await db["companies"].find().to_list(1000)
-    return companies
+    if companies is not None:
+        return companies
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Companies not found")
 
 
 @app.get("/Users", response_description="List all users", response_model=List[UserModel])
 async def list_users():
     users = await db["users"].find().to_list(1000)
-    return users
-
+    if users is not None:
+        return users
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Users not found")
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
